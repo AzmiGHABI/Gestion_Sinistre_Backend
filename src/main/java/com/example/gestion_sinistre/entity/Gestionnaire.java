@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Expert {
+public class Gestionnaire {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,16 +43,8 @@ public class Expert {
 
 
 
-    @OneToMany(mappedBy = "expert", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference(value = "expertRef")
+    @OneToMany(mappedBy = "gestionnaire", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference(value = "gestionnaireRef")
     private List<Dossier> dossiers = new ArrayList<>();
 
-
-    public List<Dossier> getDossiers() {
-        return dossiers;
-    }
-
-    public void setDossiers(List<Dossier> dossiers) {
-        this.dossiers = dossiers;
-    }
 }

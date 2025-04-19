@@ -3,6 +3,7 @@ package com.example.gestion_sinistre.controller;
 import com.example.gestion_sinistre.entity.Expert;
 import com.example.gestion_sinistre.service.ExpertService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +11,13 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(
+        origins = "*",
+        allowedHeaders = "*",
+        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT},
+        maxAge = 3600
+)
+
 @RequestMapping("/api/expert")
 public class ExpertController {
 
@@ -29,6 +37,7 @@ public class ExpertController {
 
     @PostMapping
     public Expert createExpert(@RequestBody Expert expert) {
+
         return expertService.createExpert(expert);
     }
 
@@ -36,5 +45,10 @@ public class ExpertController {
     public ResponseEntity<Void> deleteExpert(@PathVariable Long id) {
         expertService.deleteExpert(id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/getByRegion/{region}")
+    public ResponseEntity<List<Expert>> getExpersByRegion (@PathVariable String region)
+    {
+        return new ResponseEntity<>(expertService.getExpersByRegion(region), HttpStatus.OK);
     }
 }
