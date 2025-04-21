@@ -15,7 +15,7 @@ public class DossierService {
     private DossierRepository dossierRepository;
 
     public List<Dossier> getAllDossiers() {
-        return dossierRepository.findAll();
+        return (List<Dossier>) dossierRepository.findAll();
     }
 
     public Optional<Dossier> getDossierById(Long id) {

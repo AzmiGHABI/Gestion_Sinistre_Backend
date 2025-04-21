@@ -19,7 +19,7 @@ public class ExpertService {
     private DossierRepository dossierRepository;
 
     public List<Expert> getAllExperts() {
-        return expertRepository.findAll();
+        return (List<Expert>) expertRepository.findAll();
     }
 
     public Optional<Expert> getExpertById(Long id) {
