@@ -1,13 +1,7 @@
 #server:
 #  port: 8081
 #
-spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8080/realms/gestion-sinistre
-          jwk-set-uri: http://localhost:8080/realms/gestion-sinistre/protocol/openid-connect/certs
+
 #
 #keycloak:
 #  realm: gestion-sinistre
@@ -15,3 +9,12 @@ spring:
 #  resource: backend
 #  credentials:
 #    secret: aBC8ptYUHWv4ns7MBSP7mYYRXmaIVXgF
+
+
+spring:
+  security:
+    filter:
+      dispatch:
+        request: true
+  main:
+    allow-circular-references: true

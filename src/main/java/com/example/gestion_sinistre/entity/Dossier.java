@@ -3,9 +3,10 @@ package com.example.gestion_sinistre.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+
 import lombok.*;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -26,6 +27,9 @@ public class Dossier {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonProperty("id")
     private Long id;
+
+    @JsonProperty("username")
+    private String username;
 
     @JsonProperty("nom")
     private String nom;

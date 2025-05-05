@@ -7,10 +7,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.security.RolesAllowed;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -32,6 +34,8 @@ import java.util.UUID;
 
 @RequestMapping("/api/dossiers")
 
+
+
 public class DossierController {
     private final String UPLOAD_DIR = "C:/Users/takwa/Downloads" ;
 
@@ -50,6 +54,7 @@ public class DossierController {
 
     @PostMapping()
     @CrossOrigin(origins = "*", allowedHeaders = "*")
+
     public Dossier createDossier(@RequestBody Dossier dossier) {
         return dossierService.createDossier(dossier);
     }
@@ -111,5 +116,9 @@ public class DossierController {
     @GetMapping("/statut/{statut}")
     public List<Dossier> getDossiersByStatut(@PathVariable String statut) {
         return dossierService.getDossiersByStatut(statut);
+    }
+    @GetMapping("/debug-roles")
+    public ResponseEntity<?> debugRoles(Authentication authentication) {
+        return ResponseEntity.ok(authentication.getAuthorities());
     }
 }
