@@ -2,6 +2,7 @@ package com.example.gestion_sinistre.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.*;
@@ -37,6 +38,7 @@ public class Dossier {
     @JsonProperty("prenom")
     private String prenom;
 
+
     @JsonProperty("email")
     private String email;
 
@@ -52,6 +54,8 @@ public class Dossier {
 
     @JsonProperty("statut")
     private String statut;
+
+
 
     @JsonProperty("commentaireClient")
     private String commentaireClient;
@@ -74,18 +78,33 @@ public class Dossier {
     @JsonProperty("lieuSinistre")
     private String lieuSinistre;
 
+    @JsonProperty("rapportPdf")
+    private String rapportPdf;
 
+    public String getRapportPdf() {
+        return rapportPdf;
+    }
 
-
+    public void setRapportPdf(String rapportPdf) {
+        this.rapportPdf = rapportPdf;
+    }
     @ManyToOne
     @JoinColumn(name = "expert_id")
-    @JsonBackReference(value = "expertRef")
+    @JsonIgnoreProperties("dossiers") // ignore la propriété qui crée une boucle
     private Expert expert;
 
     @ManyToOne
     @JoinColumn(name = "gestionnaire_id")
     @JsonBackReference(value = "gestionnaireRef")
     private Gestionnaire gestionnaire;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getNom() {
         return nom;
@@ -206,6 +225,9 @@ public class Dossier {
     public void setId(Long id) {
         this.id = id;
     }
+
+
+
 
 
 }

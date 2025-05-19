@@ -28,7 +28,7 @@ import java.util.UUID;
 @CrossOrigin(
         origins = "*",
         allowedHeaders = "*",
-        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT},
+        methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT,RequestMethod.DELETE},
         maxAge = 3600
 )
 
@@ -107,7 +107,7 @@ public class DossierController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteDossier(@PathVariable Long id) {
         dossierService.deleteDossier(id);
     }
@@ -117,8 +117,18 @@ public class DossierController {
     public List<Dossier> getDossiersByStatut(@PathVariable String statut) {
         return dossierService.getDossiersByStatut(statut);
     }
+    @GetMapping("/username/{username}")
+    public List<Dossier> getDossiersByUsername(@PathVariable String username) {
+        return dossierService.getDossiersByUsername(username);
+    }
     @GetMapping("/debug-roles")
     public ResponseEntity<?> debugRoles(Authentication authentication) {
         return ResponseEntity.ok(authentication.getAuthorities());
     }
+    @PutMapping("/update")
+    public ResponseEntity<Dossier> updateDossier(@RequestBody Dossier dossier) {
+        Dossier updated = dossierService.createDossier(dossier); // ⚠️ Utilise `.save()` car `createDossier()` le fait déjà
+        return ResponseEntity.ok(updated);
+    }
+
 }

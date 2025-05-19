@@ -61,9 +61,17 @@ public class ExpertService {
     }
 
 
-    public List<Expert> getExpersByRegion (String region)
-    {
-        return  expertRepository.findByRegion(region);
+    public List<Expert> getExpersByRegion(String region) {
+        return expertRepository.findByRegionIgnoreCase(region);
     }
+
+    public Expert updateExpertById(Long id ,Expert expert) {
+        if (expertRepository.findById(id).isPresent())
+        {
+            return expertRepository.save(expert);
+        }
+        else return null;
+    }
+
 }
 

@@ -1,5 +1,6 @@
 package com.example.gestion_sinistre.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -44,8 +45,10 @@ public class Expert {
 
 
 
-    @OneToMany(mappedBy = "expert", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference(value = "expertRef")
+
+
+    @OneToMany(mappedBy = "expert")
+    @JsonIgnoreProperties("expert") // évite récursion
     private List<Dossier> dossiers = new ArrayList<>();
 
 

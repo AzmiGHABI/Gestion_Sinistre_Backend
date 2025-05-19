@@ -14,6 +14,9 @@ public interface DossierRepository extends CrudRepository<Dossier, Long> {
     // Dossiers par statut
     List<Dossier> findByStatut(String statut);
 
+
+    List<Dossier> findByUsername(String username);
+
     // ✅ Total de dossiers traités
     long countByStatut(String statut);
 

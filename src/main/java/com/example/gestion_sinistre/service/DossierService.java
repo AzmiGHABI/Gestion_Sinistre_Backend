@@ -34,4 +34,17 @@ public class DossierService {
     public List<Dossier> getDossiersByStatut(String statut) {
         return dossierRepository.findByStatut(statut);
     }
+
+    public List<Dossier> getDossiersByUsername(String username) {
+        return dossierRepository.findByUsername(username);
+    }
+
+
+    public Dossier updateDossier(Dossier dossier) {
+        if (dossier.getId() == null || !dossierRepository.existsById(dossier.getId())) {
+            throw new IllegalArgumentException("Dossier ID invalide pour mise à jour");
+        }
+        return dossierRepository.save(dossier);
+    }
+
 }

@@ -11,5 +11,6 @@ import java.util.Optional;
 @Repository
 public interface ExpertRepository extends CrudRepository<Expert, Long> {
     Optional<Expert> findByEmail(String email);
-    List<Expert> findByRegion(String region);
+    List<Expert> findByRegionIgnoreCase(String region);
+
 }

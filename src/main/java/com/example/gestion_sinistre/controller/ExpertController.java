@@ -35,6 +35,13 @@ public class ExpertController {
         return expert.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Expert> getExpertById(@PathVariable Long id ,@RequestBody Expert expert) {
+
+        return new ResponseEntity<>(expertService.updateExpertById(id,expert), HttpStatus.OK);
+    }
+
+
     @PostMapping
     public Expert createExpert(@RequestBody Expert expert) {
 
